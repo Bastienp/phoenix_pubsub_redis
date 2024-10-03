@@ -31,10 +31,10 @@ defmodule Phoenix.PubSub.RedisServer do
       case Redix.command(worker_pid, ["PUBLISH", namespace, bin_msg]) do
         {:ok, _} ->
           Logger.info("redis_server_publish",
-            adapter_name: IO.inspect(adapter_name),
-            worker_pid: IO.inspect(worker_pid),
-            redis_msg: IO.inspect(redis_msg),
-            bin_msg: IO.inspect(bin_msg)
+            adapter_name: inspect(adapter_name),
+            worker_pid: inspect(worker_pid),
+            redis_msg: inspect(redis_msg),
+            bin_msg: inspect(bin_msg)
           )
 
           :ok
