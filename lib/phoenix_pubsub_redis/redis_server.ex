@@ -30,6 +30,13 @@ defmodule Phoenix.PubSub.RedisServer do
     :poolboy.transaction(adapter_name, fn worker_pid ->
       case Redix.command(worker_pid, ["PUBLISH", namespace, bin_msg]) do
         {:ok, _} ->
+          Logger.info("redis_server_publish",
+            adapter_name: IO.inspect(adapter_name),
+            worker_pid: IO.inspect(worker_pid),
+            redis_msg: IO.inspect(redis_msg),
+            bin_msg: IO.inspect(bin_msg)
+          )
+
           :ok
 
         {:error, %Redix.ConnectionError{reason: :closed}} ->
